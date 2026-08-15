@@ -42,8 +42,13 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Internal Server Error' });
 });
 
-app.listen(PORT, () => {
-  console.log(`[${new Date().toISOString()}] Server listening on http://localhost:${PORT}`);
-});
+// Only start listening when this file is run directly (e.g. `node index.js`).
+// This lets test files `require('../index')` and use supertest against the
+// app without also spinning up a real server on PORT.
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`[${new Date().toISOString()}] Server listening on http://localhost:${PORT}`);
+  });
+}
 
 module.exports = app;

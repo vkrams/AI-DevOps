@@ -22,12 +22,15 @@ jobs:
         with:
           node-version: 20
           cache: npm
-          
-      - name: Verify Node.js version
+
+      - name: Print node version
         run: node -v
 
       - name: Install dependencies
         run: npm install
+
+      - name: Run tests
+        run: npm test
 
       - name: Run application
         run: node index.js
